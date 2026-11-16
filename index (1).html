@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bekzod Abdulhamidov | Cybersecurity</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Courier New', monospace;
+    }
+
+    html, body {
+        height: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        background: linear-gradient(160deg, #141c45 0%, #1f2a6b 45%, #2d1f66 100%);
+        color: #eef1fb;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    #matrix-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 0;
+        opacity: 0.22;
+    }
+
+    .wrapper {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 40px 20px;
+    }
+
+    .card {
+        background: rgba(22, 29, 68, 0.82);
+        border: 1px solid #5b7bff;
+        border-radius: 16px;
+        max-width: 720px;
+        width: 100%;
+        padding: 42px;
+        box-shadow: 0 0 55px rgba(91, 123, 255, 0.35);
+        backdrop-filter: blur(5px);
+        animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .avatar-wrap {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px;
+    }
+
+    .avatar {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+        background: linear-gradient(135deg, #1a2050, #2d1f66);
+        border: 3px solid #7fe7d4;
+        box-shadow: 0 0 25px rgba(127, 231, 212, 0.55);
+        animation: pulseGlow 3s infinite;
+    }
+
+    @keyframes pulseGlow {
+        0%, 100% { box-shadow: 0 0 20px rgba(127, 231, 212, 0.45); }
+        50% { box-shadow: 0 0 35px rgba(188, 142, 255, 0.75); }
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 28px;
+        color: #7fe7d4;
+        letter-spacing: 1px;
+    }
+
+    .role {
+        text-align: center;
+        color: #b9c4ff;
+        margin-top: 6px;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    .typing-wrap { text-align: center; }
+
+    .typing {
+        text-align: center;
+        color: #ffa3d7;
+        font-size: 13px;
+        margin-bottom: 20px;
+        min-height: 18px;
+        border-right: 2px solid #ffa3d7;
+        white-space: nowrap;
+        overflow: hidden;
+        display: inline-block;
+        animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #5b7bff, transparent);
+        margin: 24px 0;
+    }
+
+    .section-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .section-title.cyan { color: #7fe7d4; }
+    .section-title.pink { color: #ffa3d7; }
+    .section-title.amber { color: #ffc96b; }
+    .section-title.violet { color: #bc8eff; }
+
+    p.about {
+        color: #d7dcfa;
+        line-height: 1.75;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .skill {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        transition: 0.25s;
+        border: 1px solid;
+    }
+    .skill:hover { transform: translateY(-2px); }
+
+    .skill.c1 { border-color: #5b7bff; color: #9fb4ff; background: rgba(91,123,255,0.12); }
+    .skill.c1:hover { background: #5b7bff; color: #141c45; }
+
+    .skill.c2 { border-color: #7fe7d4; color: #7fe7d4; background: rgba(127,231,212,0.1); }
+    .skill.c2:hover { background: #7fe7d4; color: #141c45; }
+
+    .skill.c3 { border-color: #ffa3d7; color: #ffa3d7; background: rgba(255,163,215,0.1); }
+    .skill.c3:hover { background: #ffa3d7; color: #141c45; }
+
+    .skill.c4 { border-color: #ffc96b; color: #ffc96b; background: rgba(255,201,107,0.1); }
+    .skill.c4:hover { background: #ffc96b; color: #141c45; }
+
+    .skill.c5 { border-color: #bc8eff; color: #bc8eff; background: rgba(188,142,255,0.1); }
+    .skill.c5:hover { background: #bc8eff; color: #141c45; }
+
+    .bars { margin-top: 15px; }
+    .bar-row { margin-bottom: 12px; }
+
+    .bar-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #b9c4ff;
+        margin-bottom: 4px;
+    }
+
+    .bar-bg {
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+        height: 8px;
+        overflow: hidden;
+    }
+
+    .bar-fill {
+        height: 100%;
+        border-radius: 10px;
+        width: 0%;
+        animation: fillBar 1.8s ease-out forwards;
+    }
+
+    .bar-fill.g1 { background: linear-gradient(90deg, #5b7bff, #7fe7d4); }
+    .bar-fill.g2 { background: linear-gradient(90deg, #ffa3d7, #bc8eff); }
+    .bar-fill.g3 { background: linear-gradient(90deg, #ffc96b, #ff8a65); }
+    .bar-fill.g4 { background: linear-gradient(90deg, #7fe7d4, #5b7bff); }
+    .bar-fill.g5 { background: linear-gradient(90deg, #bc8eff, #5b7bff); }
+
+    @keyframes fillBar { to { width: var(--w); } }
+
+    .timeline {
+        margin-top: 10px;
+        border-left: 2px solid #5b7bff;
+        padding-left: 18px;
+    }
+    .timeline-item {
+        margin-bottom: 14px;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -24px;
+        top: 4px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #7fe7d4;
+        box-shadow: 0 0 8px #7fe7d4;
+    }
+    .timeline-title {
+        color: #eef1fb;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    .timeline-desc {
+        color: #b9c4ff;
+        font-size: 12px;
+        margin-top: 2px;
+        line-height: 1.5;
+    }
+
+    .contact-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 12px;
+    }
+
+    .contact-grid a {
+        text-decoration: none;
+        font-size: 13px;
+        padding: 10px 18px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.2s;
+        border: 1px solid #7fe7d4;
+        color: #7fe7d4;
+    }
+
+    .contact-grid a:hover {
+        background: #7fe7d4;
+        color: #141c45;
+        box-shadow: 0 0 15px rgba(127,231,212,0.6);
+    }
+
+    .contact-grid a.tel {
+        border-color: #ffa3d7;
+        color: #ffa3d7;
+    }
+    .contact-grid a.tel:hover {
+        background: #ffa3d7;
+        color: #141c45;
+        box-shadow: 0 0 15px rgba(255,163,215,0.6);
+    }
+
+    .terminal-line {
+        color: #7fe7d4;
+        font-size: 13px;
+        margin-top: 28px;
+        text-align: center;
+    }
+    .terminal-line span { color: #ffa3d7; }
+
+    .lock-icon {
+        text-align: center;
+        font-size: 22px;
+        margin-top: 6px;
+        display: inline-block;
+        width: 100%;
+        animation: spinLock 4s linear infinite;
+    }
+    @keyframes spinLock {
+        0%, 90%, 100% { transform: rotate(0deg); }
+        95% { transform: rotate(15deg); }
+    }
+</style>
+</head>
+<body>
+
+<canvas id="matrix-bg"></canvas>
+
+<div class="wrapper">
+<div class="card">
+    <div class="avatar-wrap">
+        <div class="avatar">
+            <svg viewBox="0 0 100 100" width="90" height="90" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hoodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#2d3561"/>
+                        <stop offset="100%" stop-color="#171b3d"/>
+                    </linearGradient>
+                    <radialGradient id="faceGlow" cx="50%" cy="40%" r="60%">
+                        <stop offset="0%" stop-color="#0b0f24"/>
+                        <stop offset="100%" stop-color="#05070f"/>
+                    </radialGradient>
+                </defs>
+                <!-- shoulders / hoodie body -->
+                <path d="M 10 95 Q 10 55 50 50 Q 90 55 90 95 Z" fill="url(#hoodGrad)" stroke="#5b7bff" stroke-width="1.5"/>
+                <!-- hood -->
+                <path d="M 20 55 Q 20 10 50 8 Q 80 10 80 55 Q 65 42 50 42 Q 35 42 20 55 Z" fill="url(#hoodGrad)" stroke="#5b7bff" stroke-width="1.5"/>
+                <!-- face shadow -->
+                <ellipse cx="50" cy="48" rx="20" ry="22" fill="url(#faceGlow)"/>
+                <!-- glowing eyes -->
+                <ellipse cx="41" cy="47" rx="4" ry="2.4" fill="#7fe7d4">
+                    <animate attributeName="opacity" values="1;0.4;1" dur="2.4s" repeatCount="indefinite"/>
+                </ellipse>
+                <ellipse cx="59" cy="47" rx="4" ry="2.4" fill="#7fe7d4">
+                    <animate attributeName="opacity" values="1;0.4;1" dur="2.4s" repeatCount="indefinite"/>
+                </ellipse>
+                <!-- eye glow blur -->
+                <ellipse cx="41" cy="47" rx="7" ry="4" fill="#7fe7d4" opacity="0.25"/>
+                <ellipse cx="59" cy="47" rx="7" ry="4" fill="#7fe7d4" opacity="0.25"/>
+            </svg>
+        </div>
+    </div>
+    <h1>Bekzod Abdulhamidov</h1>
+    <p class="role">Cybersecurity Student — Najot Ta'lim</p>
+    <div class="typing-wrap">
+        <span class="typing" id="typingText"></span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title cyan">🧠 Haqimda</div>
+    <p class="about">
+        Men Najot Ta'limda kiberxavfsizlik yo'nalishi bo'yicha ta'lim olyapman.
+        Red Team sohasidagi bilimlarni to'liq o'zlashtirganman — tarmoqlarni
+        skanerlash, zaifliklarni aniqlash, exploitatsiya qilish va kirish
+        huquqini oshirish (privilege escalation) bo'yicha amaliy tajribaga egaman.
+        Hozirda OSCP sertifikatiga tayyorgarlik ko'rmoqdaman.
+    </p>
+    <p class="about">
+        Shu bilan birga tarmoq texnologiyalari va Cisco infratuzilmasini ham
+        chuqur o'rganyapman, chunki haqiqiy kompaniya tarmog'ini himoya qilish
+        yoki sinovdan o'tkazish uchun routing, switching va tarmoq xavfsizligi
+        asoslarini bilish shart. Maqsadim — nazariya va amaliyotni birlashtirgan,
+        to'liq qamrovli Penetration Tester bo'lish.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="section-title pink">🛡️ Ko'nikmalar</div>
+    <div class="skills">
+        <span class="skill c1">Red Team</span>
+        <span class="skill c2">Nmap</span>
+        <span class="skill c3">Metasploit</span>
+        <span class="skill c4">Burp Suite</span>
+        <span class="skill c5">Linux / Kali</span>
+        <span class="skill c1">Web Exploitation</span>
+        <span class="skill c2">Privilege Escalation</span>
+        <span class="skill c3">FTP / HTTP Enum</span>
+        <span class="skill c4">Reverse Shell</span>
+        <span class="skill c5">OSCP (tayyorgarlik)</span>
+        <span class="skill c4">OSI / TCP-IP model</span>
+        <span class="skill c1">Subnetting / VLSM</span>
+        <span class="skill c2">VLAN</span>
+        <span class="skill c3">Routing (Static, OSPF, RIP)</span>
+        <span class="skill c5">Switching</span>
+        <span class="skill c4">ACL (Access Control List)</span>
+        <span class="skill c1">NAT / PAT</span>
+        <span class="skill c2">Cisco Packet Tracer</span>
+        <span class="skill c3">Cisco IOS CLI</span>
+        <span class="skill c5">STP (Spanning Tree)</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title violet">📊 Ko'nikma darajasi</div>
+    <div class="bars">
+        <div class="bar-row">
+            <div class="bar-label"><span>Red Teaming</span><span>90%</span></div>
+            <div class="bar-bg"><div class="bar-fill g1" style="--w:90%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>Web Exploitation</span><span>80%</span></div>
+            <div class="bar-bg"><div class="bar-fill g2" style="--w:80%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>Network Scanning (Nmap)</span><span>85%</span></div>
+            <div class="bar-bg"><div class="bar-fill g3" style="--w:85%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>Tarmoq / Cisco asoslari</span><span>65%</span></div>
+            <div class="bar-bg"><div class="bar-fill g4" style="--w:65%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>OSCP Tayyorgarlik</span><span>55%</span></div>
+            <div class="bar-bg"><div class="bar-fill g5" style="--w:55%"></div></div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title pink">📬 Bog'lanish</div>
+    <div class="contact-grid">
+        <a href="mailto:bekzodabdulhamidov53@gmail.com">✉ bekzodabdulhamidov53@gmail.com</a>
+        <a href="tel:+998771238503" class="tel">📞 +998 77 123 85 03</a>
+    </div>
+
+    <div class="lock-icon">🔒</div>
+    <div class="terminal-line">
+        root@bekzod:~# <span>access granted</span> ✔
+    </div>
+</div>
+</div>
+
+<script>
+const canvas = document.getElementById('matrix-bg');
+const ctx = canvas.getContext('2d');
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const chars = "01アBEKZODカンバンHACK01SECUREサイバーCISCO01NET";
+const fontSize = 16;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = new Array(columns).fill(1);
+
+function draw() {
+    ctx.fillStyle = "rgba(20, 28, 69, 0.1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#5b7bff";
+    ctx.font = fontSize + "px monospace";
+    for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+}
+setInterval(draw, 50);
+
+const phrases = [
+    "> scanning network...",
+    "> exploit delivered.",
+    "> access granted.",
+    "> configuring VLAN...",
+    "> preparing for OSCP..."
+];
+let phraseIndex = 0, charIndex = 0, deleting = false;
+const typingEl = document.getElementById('typingText');
+
+function typeLoop() {
+    const current = phrases[phraseIndex];
+    if (!deleting) {
+        typingEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+            deleting = true;
+            setTimeout(typeLoop, 1200);
+            return;
+        }
+    } else {
+        typingEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+            deleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+    }
+    setTimeout(typeLoop, deleting ? 40 : 70);
+}
+typeLoop();
+</script>
+
+</body>
+</html>
